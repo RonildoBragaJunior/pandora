@@ -16,8 +16,9 @@ Your API must provides these end points:
 
 
 ## Setup
-1. Clone the project `https://github.com/RonildoBragaJunior/pandora.git`
-2. Inside project folder, create environment follwing the command
+1. Clone the project 
+`git clone https://github.com/RonildoBragaJunior/pandora.git`
+3. Inside project folder, create environment follwing the command
 `python3 -m venv venv`
 3. Activate the environment
 `source venv/bin/activate`
@@ -26,8 +27,11 @@ Your API must provides these end points:
 5. Make migrations
 `python manage.py makemigrations`
 `python manage.py migrate`
-5. Access the welcome endpoint to load the database
+7. Run the server
+`python manage.py runserver`
+9. Access the welcome endpoint to load the database
 `http://127.0.0.1:8000/v1/pandora/welcome`
+10. Follow the instructions bellow to access the API endpoints
 
 ## API Endpoints
 - `/v1/pandora/welcome` - Load json files
