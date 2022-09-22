@@ -16,7 +16,7 @@ Your API must provides these end points:
 
 
 ## Setup
-1. Clone the project
+1. Clone the project `https://github.com/RonildoBragaJunior/pandora.git`
 2. Inside project folder, create environment follwing the command
 `python3 -m venv venv`
 3. Activate the environment
@@ -28,7 +28,7 @@ Your API must provides these end points:
 
 ## API Endpoints
 - `/v1/pandora/welcome` - Load json files
-- `/v1/pandora/companies/<int:id_company>/employees/` - Company's details and its employees.
+- `/v1/pandora/companies/<int:id_company>/employees/` - Company details and its employees.
 - `/v1/pandora/people/<int:id_first_person>/common_friends/<int:id_second_person>/` - People common friends
 - `/v1/pandora/people/<int:id_person>/favourite_fruit_vegetables/` - People details including their favourite fruits and vegetables.
 
@@ -46,5 +46,4 @@ Your API must provides these end points:
 
 ## Running tests
 - You can run the unittest by running this command: `python manage.py test`
-
-If you have changed the json files, you need to update the tests to match the expected results
+- **If you have changed the json files, you need to update the tests to match the expected results**
