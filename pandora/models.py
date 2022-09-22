@@ -16,6 +16,7 @@ FOOD_TYPE = (
 
 class Company(models.Model):
     index = models.BigAutoField(primary_key=True)
+    guid = models.UUIDField(default=uuid.uuid4)
     name = models.CharField(max_length=100)
 
 
@@ -30,7 +31,7 @@ class Food(models.Model):
 
 class People(models.Model):
     index = models.BigAutoField(primary_key=True)
-    guid = models.UUIDField(default=uuid.uuid4, editable=True, blank=True, null=True)
+    guid = models.UUIDField(default=uuid.uuid4)
     company = models.ForeignKey(Company, related_name='employees', on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag)
     favourite_food = models.ManyToManyField(Food)
@@ -71,8 +72,8 @@ class People(models.Model):
 
         return fruits, vegetables
 
-    def friends_in_common(self, id, eye_color, has_died):
-        second_person = People.objects.get(index=id)
+    def friends_in_common(self, guid, eye_color, has_died):
+        second_person = People.objects.get(guid=guid)
         first_friends = self.friends
         second_friends = second_person.friends
 

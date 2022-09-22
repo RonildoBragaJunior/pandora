@@ -24,20 +24,29 @@ def welcome(request):
     except:
         return HttpResponseBadRequest('Bad request', status=400)
 
-
-
-def company_employees(request, id_company):
+def list_companies(request):
     '''
-    Finds company employees gigen a determined company index.
+    List all companies in padora.
+    '''
+    queryset = Company.objects.values()
+    data = {
+        "qtd_companies": queryset.count(),
+        "companies": list(queryset)
+    }
+    return JsonResponse(data)
+
+def company_employees(request, guid_company):
+    '''
+    Finds company employees given a determined company index.
         Parameters:
-                id_company (int): A decimal integer
+                guid_company (str): A UUID (Universal Unique Identifier)
         Returns:
                 json (json object): An HTTP response class that consumes data to be serialized to JSON
         Raises:
             HttpResponseBadRequest: If the company index does not exists
     '''
     try:
-        company = Company.objects.get(index=id_company)
+        company = Company.objects.get(guid=guid_company)
         data = {
             'company_index': company.index,
             'company_name': company.name,
@@ -48,21 +57,21 @@ def company_employees(request, id_company):
         return HttpResponseBadRequest('Bad request', status=404)
 
 
-def friends_in_common(request, id_first_person, id_second_person):
+def friends_in_common(request, guid_first_person, guid_second_person):
     '''
-    Finds friends in common gigen the index of 2 people.
+    Finds friends in common given the index of 2 people.
         Parameters:
-                id_first_person (int): A decimal integer
-                id_second_person (int): A decimal integer
+                guid_first_person (str): A UUID (Universal Unique Identifier)
+                guid_second_person (str): A UUID (Universal Unique Identifier)
         Returns:
                 json (json object): An HTTP response class that consumes data to be serialized to JSON
         Raises:
             HttpResponseBadRequest: If one of the person index does not exists
     '''
     try:
-        first_person = People.objects.get(index=id_first_person)
+        first_person = People.objects.get(guid=guid_first_person)
         second_person, common_friends = first_person.friends_in_common(
-            id=id_second_person, eye_color='brown', has_died=False)
+            guid=guid_second_person, eye_color='brown', has_died=False)
         data = {
             'first_person': {
                 'name': first_person.name,
@@ -85,18 +94,18 @@ def friends_in_common(request, id_first_person, id_second_person):
         return HttpResponseBadRequest('Bad request', status=404)
 
 
-def favourite_fruit_vegetables(request, id_person):
+def favourite_fruit_vegetables(request, guid_person):
     '''
-    Finds favourite food gigen the index of 1 person.
+    Finds favourite food given the index of 1 person.
         Parameters:
-                id_person (int): A decimal integer
+                guid_person (str): A UUID (Universal Unique Identifier)
         Returns:
                 json (json object): An HTTP response class that consumes data to be serialized to JSON
         Raises:
             HttpResponseBadRequest: If the person index does not exists
     '''
     try:
-        people = People.objects.get(index=id_person)
+        people = People.objects.get(guid=guid_person)
         fruits, vegetables = people.favourite_fruit_vegetables
         data = {
             'username': people.name,
