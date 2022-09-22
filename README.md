@@ -52,4 +52,3 @@ Your API must provides these end points:
 
 ## Running tests
 - You can run the unittest by running this command: `python manage.py test`
-- **If you have changed the json files, you need to update the tests to match the expected results**
