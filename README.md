@@ -23,19 +23,25 @@ Your API must provides these end points:
 `source venv/bin/activate`
 4. Intall the project requirements
 `pip install -r requirements.txt`
+5. Make migrations
+`python manage.py makemigrations`
+`python manage.py migrate`
 5. Access the welcome endpoint to load the database
 `http://127.0.0.1:8000/v1/pandora/welcome`
 
 ## API Endpoints
 - `/v1/pandora/welcome` - Load json files
-- `/v1/pandora/companies/<int:id_company>/employees/` - Company details and its employees.
-- `/v1/pandora/people/<int:id_first_person>/common_friends/<int:id_second_person>/` - People common friends
-- `/v1/pandora/people/<int:id_person>/favourite_fruit_vegetables/` - People details including their favourite fruits and vegetables.
+- `/v1/pandora/companies/` - List all companies so you see their guuid that is auto generated
+- `/v1/pandora/companies/<str:guid_company>/employees/` - Company details and its employees.
+- `/v1/pandora/people/<str:guid_first_person>/common_friends/<str:guid_second_person>/` - People common friends
+- `/v1/pandora/people/<str:guid_person>/favourite_fruit_vegetables/` - People details including their favourite fruits and vegetables.
 
 ## API calls
-- `curl "http://127.0.0.1:8000/v1/pandora/companies/1/employees/"`
-- `curl "http://127.0.0.1:8000/v1/pandora/people/0/common_friends/1/"`
-- `curl "http://127.0.0.1:8000/v1/pandora/people/1/favourite_fruit_vegetables/"`
+- `curl "http://127.0.0.1:8000/v1/pandora/welcome"`
+- `curl "http://127.0.0.1:8000/v1/pandora/companies/"`
+- `curl "http://127.0.0.1:8000/v1/pandora/companies/739193e6-fe0d-4768-bf69-7f94c9438572/employees/"`
+- `curl "http://127.0.0.1:8000/v1/pandora/people/5e71dc5d-61c0-4f3b-8b92-d77310c7fa43/common_friends/b057bb65-e335-450e-b6d2-d4cc859ff6cc/"`
+- `curl "http://127.0.0.1:8000/v1/pandora/people/b057bb65-e335-450e-b6d2-d4cc859ff6cc/favourite_fruit_vegetables/"`
 
 ## Adding or Updating more data
 - You can just change the json files in the resources folder and hit the welcome endpoint
